@@ -22,6 +22,8 @@ class GreeClimate : public climate::Climate, public Component {
   void setup() override;
   void set_supports_cool(bool supports_cool) { this->supports_cool_ = supports_cool; }
   void set_supports_heat(bool supports_heat) { this->supports_heat_ = supports_heat; }
+  // Follow suggested circuit from:
+  // https://github.com/crankyoldgit/IRremoteESP8266/blob/master/examples/TurnOnGreeAC/TurnOnGreeAC.ino
   void set_data_pin(int data_pin) { this->data_pin_ = data_pin; }
 };
 
