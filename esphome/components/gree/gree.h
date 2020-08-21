@@ -16,7 +16,7 @@ class GreeClimate : public climate::Climate, public Component {
   bool supports_cool_{true};
   bool supports_heat_{true};
   int data_pin_{2};
-  IRGreeAC *m_ac{nullptr};
+  IRGreeAC *ac_{nullptr};
 
  public:
   void setup() override;

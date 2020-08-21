@@ -18,19 +18,19 @@ climate::ClimateTraits GreeClimate::traits() {
 
 void GreeClimate::setup() {
   // This will be called by App.setup()
-  m_ac = new IRGreeAC(this->data_pin_);
-  m_ac->begin();
+  ac_ = new IRGreeAC(this->data_pin_);
+  ac_->begin();
   delay(200);
-  m_ac->on();
-  m_ac->setFan(0);
+  ac_->on();
+  ac_->setFan(0);
   // kGreeAuto, kGreeDry, kGreeCool, kGreeFan, kGreeHeat
-  m_ac->setMode(kGreeAuto);
-  m_ac->setSwingVertical(true, kGreeSwingAuto);
-  m_ac->setXFan(false);
-  m_ac->setLight(true);
-  m_ac->setFan(0);
-  m_ac->setSleep(false);
-  m_ac->setTurbo(false);
+  ac_->setMode(kGreeAuto);
+  ac_->setSwingVertical(true, kGreeSwingAuto);
+  ac_->setXFan(false);
+  ac_->setLight(true);
+  ac_->setFan(0);
+  ac_->setSleep(false);
+  ac_->setTurbo(false);
   // sensible default
   this->target_temperature = 20.0f;
   this->publish_state();
@@ -43,29 +43,29 @@ void GreeClimate::control(const climate::ClimateCall &call) {
 
     switch (mode) {
       case climate::CLIMATE_MODE_OFF:
-        m_ac->off();
+        ac_->off();
         break;
       case climate::CLIMATE_MODE_AUTO:
-        m_ac->setMode(kGreeAuto);
-        m_ac->on();
+        ac_->setMode(kGreeAuto);
+        ac_->on();
         break;
       case climate::CLIMATE_MODE_COOL:
-        m_ac->setMode(kGreeCool);
-        m_ac->on();
+        ac_->setMode(kGreeCool);
+        ac_->on();
         break;
       case climate::CLIMATE_MODE_HEAT:
-        m_ac->setMode(kGreeHeat);
-        m_ac->on();
+        ac_->setMode(kGreeHeat);
+        ac_->on();
         break;
     }
 
     // Always set the target temperature
     // to make the switch between heat and
     // cool seamless.
-    m_ac->setTemp(this->target_temperature);
+    ac_->setTemp(this->target_temperature);
 
     // Send mode to hardware
-    m_ac->send();
+    ac_->send();
     delay(200);
 
     // Publish updated state
@@ -76,8 +76,8 @@ void GreeClimate::control(const climate::ClimateCall &call) {
     // User requested target temperature change
     float temp = *call.get_target_temperature();
 
-    m_ac->setTemp(temp);
-    m_ac->send();
+    ac_->setTemp(temp);
+    ac_->send();
 
     this->target_temperature = temp;
     this->publish_state();
