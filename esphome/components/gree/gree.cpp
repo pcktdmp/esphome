@@ -9,9 +9,9 @@ climate::ClimateTraits GreeClimate::traits() {
   traits.set_supports_auto_mode(true);
   traits.set_supports_cool_mode(this->supports_cool_);
   traits.set_supports_heat_mode(this->supports_heat_);
-  traits.set_visual_min_temperature(16.0f);
-  traits.set_visual_max_temperature(30.0f);
-  traits.set_visual_temperature_step(1.0f);
+  traits.set_visual_min_temperature(this->visual_min_temperature_);
+  traits.set_visual_max_temperature(this->visual_max_temperature_);
+  traits.set_visual_temperature_step(this->visual_temperature_step_);
   traits.set_supports_two_point_target_temperature(false);
   return traits;
 }
@@ -22,15 +22,14 @@ void GreeClimate::setup() {
   ac_->begin();
   delay(200);
   ac_->on();
-  ac_->setFan(0);
+  ac_->setFan(this->ac_fan_);
   // kGreeAuto, kGreeDry, kGreeCool, kGreeFan, kGreeHeat
   ac_->setMode(kGreeAuto);
-  ac_->setSwingVertical(true, kGreeSwingAuto);
-  ac_->setXFan(false);
-  ac_->setLight(true);
-  ac_->setFan(0);
-  ac_->setSleep(false);
-  ac_->setTurbo(false);
+  ac_->setSwingVertical(this->ac_swing_, kGreeSwingAuto);
+  ac_->setXFan(this->ac_xfan_);
+  ac_->setLight(this->ac_light_);
+  ac_->setSleep(this->ac_sleep_);
+  ac_->setTurbo(this->ac_turbo_);
   // sensible default
   this->target_temperature = 20.0f;
   this->publish_state();
@@ -55,6 +54,16 @@ void GreeClimate::control(const climate::ClimateCall &call) {
         break;
       case climate::CLIMATE_MODE_HEAT:
         ac_->setMode(kGreeHeat);
+        ac_->on();
+        break;
+      // For future use with home assistant.
+      case climate::CLIMATE_MODE_FAN_ONLY:
+        ac_->setMode(kGreeFan);
+        ac_->on();
+        break;
+      // For future use with home assistant.
+      case climate::CLIMATE_MODE_DRY:
+        ac_->setMode(kGreeDry);
         ac_->on();
         break;
     }
