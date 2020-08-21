@@ -4,7 +4,7 @@ from esphome.components import climate
 from esphome.const import CONF_ID, CONF_SUPPORTS_COOL,\
     CONF_SUPPORTS_HEAT, CONF_DATA_PIN, CONF_SWING_MODE,\
     CONF_MIN_TEMPERATURE, CONF_MAX_TEMPERATURE, CONF_TEMPERATURE_STEP,\
-    CONF_SWING_MODE, CONF_LIGHT, CONF_MAX_POWER
+    CONF_SWING_MODE, CONF_LIGHT, CONF_MAX_POWER, CONF_DEFAULT_TARGET_TEMPERATURE
 
 gree_ns = cg.esphome_ns.namespace('gree')
 GreeClimate = gree_ns.class_('GreeClimate', climate.Climate, cg.Component)
@@ -22,7 +22,7 @@ CONFIG_SCHEMA = cv.All(climate.CLIMATE_SCHEMA.extend({
     cv.Optional('sleep', default=False): cv.boolean,
     cv.Optional('xfan', default=False): cv.boolean,
     cv.Optional(CONF_MAX_POWER, default=False): cv.boolean,
-    cv.Optional(CONF_DATA_PIN, default=2): cv.int_,
+    cv.Optional(CONF_DATA_PIN, default=4): cv.int_,
 }).extend(cv.COMPONENT_SCHEMA))
 
 

@@ -1289,6 +1289,20 @@ climate:
     name: LG Climate
   - platform: toshiba
     name: Toshiba Climate
+  - platform: gree
+    name: Gree Climate
+    supports_heat: True
+    supports_cool: True
+    sleep: True
+    data_pin: 6
+    max_temperature: 1000
+    min_temperature: 0
+    default_target_temperature: 10
+    temperature_step: 5.0
+    xfan: True
+    max_power: True
+    light: True
+    swing_mode: False
 
 switch:
   - platform: gpio

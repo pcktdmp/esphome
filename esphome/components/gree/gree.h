@@ -25,7 +25,7 @@ class GreeClimate : public climate::Climate, public Component {
   bool ac_light_{false};
   bool ac_sleep_{false};
   bool ac_turbo_{false};
-  int data_pin_{2};
+  int data_pin_{4};
   IRGreeAC *ac_{nullptr};
 
  public:
