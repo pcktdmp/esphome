@@ -18,6 +18,7 @@ class GreeClimate : public climate::Climate, public Component {
   float visual_min_temperature_{16.0f};
   float visual_max_temperature_{30.0f};
   float visual_temperature_step_{1.0f};
+  float default_target_temperature_{20.0f};
   int ac_fan_{0};
   bool ac_swing_{true};
   bool ac_xfan_{false};
@@ -34,6 +35,7 @@ class GreeClimate : public climate::Climate, public Component {
   void set_visual_min_temperature(float visual_min_temperature) { this->visual_min_temperature_ = visual_min_temperature; }
   void set_visual_max_temperature(float visual_max_temperature) { this->visual_max_temperature_ = visual_max_temperature; }
   void set_visual_temperature_step(float visual_temperature_step) { this->visual_temperature_step_ = visual_temperature_step; }
+  void set_default_target_temperature(float default_target_temperature) { this->default_target_temperature_ = default_target_temperature; }
   void set_ac_fan(int ac_fan) { this->ac_fan_ = ac_fan; }
   void set_ac_swing(bool ac_swing) { this->ac_swing_ = ac_swing; }
   void set_ac_xfan(bool ac_xfan) { this->ac_xfan_ = ac_xfan; }
