@@ -22,7 +22,7 @@ CONFIG_SCHEMA = cv.All(climate.CLIMATE_SCHEMA.extend({
     cv.Optional('sleep', default=False): cv.boolean,
     cv.Optional('xfan', default=False): cv.boolean,
     cv.Optional(CONF_MAX_POWER, default=False): cv.boolean,
-    cv.Optional(CONF_DATA_PIN, default=4): cv.int_,
+    cv.Optional('ir_pin', default=4): cv.int_,
 }).extend(cv.COMPONENT_SCHEMA))
 
 
@@ -42,4 +42,4 @@ def to_code(config):
     cg.add(var.set_ac_sleep(config['sleep']))
     cg.add(var.set_ac_xfan(config['xfan']))
     cg.add(var.set_ac_turbo(config[CONF_MAX_POWER]))
-    cg.add(var.set_data_pin(config[CONF_DATA_PIN]))
+    cg.add(var.set_ir_pin(config['ir_pin']))

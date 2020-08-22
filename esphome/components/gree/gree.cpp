@@ -17,8 +17,8 @@ climate::ClimateTraits GreeClimate::traits() {
 }
 
 void GreeClimate::setup() {
-  // This will be called by App.setup()
-  ac_ = new IRGreeAC(this->data_pin_);
+  // https://github.com/crankyoldgit/IRremoteESP8266/blob/master/src/IRsend.h
+  ac_ = new IRGreeAC(this->ir_pin_);
   ac_->begin();
   delay(200);
   ac_->on();
@@ -30,8 +30,7 @@ void GreeClimate::setup() {
   ac_->setLight(this->ac_light_);
   ac_->setSleep(this->ac_sleep_);
   ac_->setTurbo(this->ac_turbo_);
-  // sensible default
-  this->target_temperature = 20.0f;
+  this->target_temperature = this->default_target_temperature_;
   this->publish_state();
 }
 

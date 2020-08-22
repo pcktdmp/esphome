@@ -25,7 +25,7 @@ class GreeClimate : public climate::Climate, public Component {
   bool ac_light_{false};
   bool ac_sleep_{false};
   bool ac_turbo_{false};
-  int data_pin_{4};
+  int ir_pin_{4};
   IRGreeAC *ac_{nullptr};
 
  public:
@@ -45,7 +45,7 @@ class GreeClimate : public climate::Climate, public Component {
 
   // Follow suggested circuit from:
   // https://github.com/crankyoldgit/IRremoteESP8266/blob/master/examples/TurnOnGreeAC/TurnOnGreeAC.ino
-  void set_data_pin(int data_pin) { this->data_pin_ = data_pin; }
+  void set_ir_pin(int ir_pin) { this->ir_pin_ = ir_pin; }
 };
 
 }  // namespace gree

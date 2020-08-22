@@ -1294,7 +1294,7 @@ climate:
     supports_heat: True
     supports_cool: True
     sleep: True
-    data_pin: 6
+    ir_pin: 6
     max_temperature: 1000
     min_temperature: 0
     default_target_temperature: 10
